@@ -91,6 +91,7 @@ plan_tests.txt           : plan de test
 - **Débit 2 + / -**
 - **Débit 3 + / -**
 - **Quitter**
+<img width="1174" height="790" alt="image" src="https://github.com/user-attachments/assets/0724491d-25fa-4977-b77a-150096792171" />
 
 ## Fonctionnalités réalisées
 

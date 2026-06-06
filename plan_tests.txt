@@ -1,0 +1,74 @@
+Plan de test - Supervision production de jus
+============================================
+
+Test : Connexion Modbus
+Action : Lancer automate_jus_visuel.py puis supervision_terminal.py.
+Resultat attendu : Communication OK.
+Resultat observe :
+Statut :
+
+Test : Lecture phases
+Action : Demarrer le systeme et observer les transitions.
+Resultat attendu : La phase affiche ARRET, REMPLISSAGE/MELANGE ou EMBOUTEILLAGE selon les coils lus.
+Resultat observe :
+Statut :
+
+Test : Lecture niveau
+Action : Observer le niveau brut et le pourcentage.
+Resultat attendu : Niveau entre 0 et 10000, pourcentage = niveau / 10000 * 100.
+Resultat observe :
+Statut :
+
+Test : Lecture pompes
+Action : Observer P1, P2 et P3 pendant le cycle.
+Resultat attendu : P1/P2 actives en remplissage, P3 active en embouteillage.
+Resultat observe :
+Statut :
+
+Test : Commande marche
+Action : Cliquer Demarrer ou choisir 1 dans le terminal.
+Resultat attendu : Ecriture sur FORC_MAR et demarrage du cycle.
+Resultat observe :
+Statut :
+
+Test : Arret urgence
+Action : Cliquer Arret urgence ou choisir 2 dans le terminal.
+Resultat attendu : Ecriture sur FORC_ARR et affichage d'une phase/arret coherent.
+Resultat observe :
+Statut :
+
+Test : Reset arret
+Action : Cliquer Reset arret ou choisir 3 dans le terminal.
+Resultat attendu : FORC_ARR repasse a False et le systeme peut etre relance.
+Resultat observe :
+Statut :
+
+Test : Modification debit valide
+Action : Saisir 100, 0 puis 500 dans le terminal, ou utiliser +/- dans le GUI.
+Resultat attendu : Valeurs acceptees et ecrites en registre.
+Resultat observe :
+Statut :
+
+Test : Modification debit invalide
+Action : Saisir -10, 700 puis abc dans le terminal.
+Resultat attendu : Valeurs refusees, aucune ecriture Modbus, message clair.
+Resultat observe :
+Statut :
+
+Test : Perte communication
+Action : Fermer automate_jus_visuel.py pendant que la supervision tourne.
+Resultat attendu : L'application reste ouverte et affiche Perte de communication Modbus.
+Resultat observe :
+Statut :
+
+Test : Historique CSV
+Action : Laisser tourner la supervision au moins 5 secondes.
+Resultat attendu : historique.csv existe avec une ligne par seconde et les colonnes demandees.
+Resultat observe :
+Statut :
+
+Test : Alarme niveau bloque
+Action : Provoquer une phase active sans variation suffisante du niveau pendant plus de 5 secondes.
+Resultat attendu : Alarme Niveau bloque pendant le remplissage ou l'embouteillage.
+Resultat observe :
+Statut :
